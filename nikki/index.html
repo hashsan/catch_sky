@@ -1,7 +1,36 @@
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>catch sky</title>
+  <link rel="stylesheet" href="https://hashsan.github.io/fujiyama/fujiyama.css?v15">
+  <style>
+    #left{
+      margin-left:2rem;
+    }    
+  </style> 
+<script type="module" src="https://hashsan.github.io/use/use.js?v31" crossorigin=""></script>  
 </head>
 <body>
-  
+  <div id="left" class="pbox">
+    <div>
+      <a href="#index">index</a>
+      <a href="#new">new</a>          
+      <a href="#login">login</a>      
+    </div>  
+    <div class="view wrap"></div>
+    <div class="r"><a href="#">goto ^</a></div>
+  </div>
+  <script>
+console.log(location)
+function geturl(){
+  const DEF_URL ='https://hashsan.github.io/catch_sky/nikki/'  
+  const {origin,pathname} =location
+  const url = origin + pathname
+  const {isgithub} = fn.gitpass(url)
+  if(!isgithub){
+    return DEF_URL
+  }
+  return url
+}
+var o = fn.gitpass(geturl())
+console.log(o)
+    
+  </script>
 </body>
