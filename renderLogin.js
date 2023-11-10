@@ -1,3 +1,5 @@
+import Config from "https://hashsan.github.io/catch_sky/Config.js";
+
 async function renderLogin(){
  var view = fn.q('#left .view')
  var temp=`
@@ -15,6 +17,7 @@ https://i.pinimg.com/564x/14/99/3f/14993fba3af61fa74927224ecd133dd8.jpg
  `
  view.innerHTML= fujiyama(temp) 
   
+  const {GHP_KEY,geturl} = Config 
   var login = fn.q('#login')
   login.value = localStorage[GHP_KEY];
   check(localStorage[GHP_KEY])
