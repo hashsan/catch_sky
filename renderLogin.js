@@ -1,4 +1,5 @@
 import Config from "https://hashsan.github.io/catch_sky/Config.js";
+import {Octo} from "//hashsan.github.io/Octo/Octo.js"
 
 async function renderLogin(){
  var view = fn.q('#left .view')
