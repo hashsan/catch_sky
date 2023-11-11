@@ -1,10 +1,26 @@
+/*
+v1 luched
+v2 refactor so less
+*/
+
 import "//hashsan.github.io/use/use.js"
 import {Octo} from "//hashsan.github.io/Octo/Octo.js"
+
+
+/*
+function makeDay(){
+  const diff = 9*60*60*1000
+  const now = new Date(Date.now()+diff).toISOString()
+  .split('T').at(0).split('-').join('')
+  return now
+}
+*/
 
 
 class CatchSky{  
   KEY_TOKEN = 'CatchSky_token'
   DEF_URL = 'https://hashsan.github.io/catch_sky/nikki/index.html'
+  CLS_AUTH = 'CatchSky_auth'
   isauth = false;
   ///
   constructor(){
@@ -17,23 +33,9 @@ class CatchSky{
 
     if(!this.getToken()){
       console.log('need setToken(token)',this.KEY_TOKEN)
-    }
-        
+    }        
     this.checkAuth()
   }
-  /*
-  getAvatorElement(){
-    const id ="CatchSkyUser"
-    var el = fn.q('#'+id)
-    if(!el){
-      var img = new Image()
-      img.src=''
-      img.id = id;
-      document.body.prepend(img)
-      el = img
-    }
-    return el    
-  }*/
   getUrl(url){
     let d = this.isGithub(url)?url:this.DEF_URL
     return fn.clearurl(d)    
@@ -44,48 +46,31 @@ class CatchSky{
   
   ///
   checkAuth=async()=>{
-
-    this.img=await new Octo(this.site_url,this.getToken())
-      .auth()
+    this.img=await new Octo(this.site_url,this.getToken()).auth()
     this.isauth = !!this.img
-    /*
     if(this.isauth){
-      this.getAvatorElement().src=this.img
+      document.body.classList.add(this.CLS_AUTH) //on off the editor
     }
-    */
     return this.img
-
   }
-  ////
-  isAuth=()=>{
-    return this.isauth
-  }
-  getSiteUrl=()=>{
-    return this.site_url
-  }
+  isAuth=()=>{ return this.isauth }
+  getSiteUrl=()=>{ return this.site_url }
   getFileUrl=(file)=>{
     if(!file){
       throw new Error('need file')
     }
     return fn.tailchange(this.site_url,file)
   }
-  getRepoUrl=()=>{
-    return this.repo_url
-  }
-  setToken=(token)=>{
-    localStorage[this.KEY_TOKEN]=token
-  }
-  getToken=()=>{
-    return localStorage[this.KEY_TOKEN];
-  }
-  ///
+  getRepoUrl=()=>{ return this.repo_url }
+  setToken=(token)=>{ localStorage[this.KEY_TOKEN]=token }
+  getToken=()=>{ return localStorage[this.KEY_TOKEN]; }
+  
 }
 
 
 
 CatchSky = new CatchSky()
 export {CatchSky}
-
 
 
 
