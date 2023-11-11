@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="ja" >
 
 <head>
   <meta charset="UTF-8">
@@ -8,13 +8,50 @@
   
   
 
-  <title>CodePen - このサイトは</title>
+  <title>＃ここはキャッチャーインザースカイのサイトです。</title>
 
-    <link rel="canonical" href="https://codepen.io/pinkromeo/pen/QWYvRMJ">
+    <link rel="canonical" href="https://codepen.io/pinkromeo/pen/gOqWVXr">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
   
-  <link rel='stylesheet' href='//hashsan.github.io/blackout/blackout.css'>
   
+<style>
+@import url(https://hashsan.github.io/fujiyama/fujiyama.css);
+
+@import url('//hashsan.github.io/EditorFrame/EditorFrame.css?v2');
+
+body{
+  overflow-y:scroll;
+}
+
+.CatchSky{
+  transition:all 0.7s;
+}
+.CatchSky>.body{
+  margin-bottom:50vh;
+}
+
+#today{
+  display:none;
+}
+.CatchSky_auth #today{
+  display:initial;
+}
+.CatchSky_auth .CatchSky{
+  margin-left:2rem;
+}
+
+#CatchSkyUser{
+  width:2rem;
+  height:2rem;
+  position:fixed;
+  top:0.5rem;
+  right:0.5rem;
+  border-radius:100%;
+  background:#999;
+  display:block;
+}
+</style>
 
   
   
@@ -22,91 +59,161 @@
 </head>
 
 <body>
-  <h1>このサイトの純粋なアドレスは</h1>
-<h1><span id="url"></span></h1>
-<h1>このサイトの一覧を示すアドレスは</h1>
-<h1><span id="repo_url"></span></h1>
-<h1>セーブされるアドレスは</h1>
-<h1><span id="save_url"></span></h1>
-<style>
-  h1,span{
-  word-break:break-all;
-}
-</style>
+  <div class="CatchSky pbox">
+  <div class="header">
+    <a href="#index">index</a> 
+    <a href="#help">help</a>
+    <a id="today" href="#">...</a>
+  </div>  
+  <div class="body wrap"></div>
+  <div class="footer r">
+    <a href="#index">index</a> 
+    <a href="#">goto^</a>
+  </div>
+</div>
   
       <script id="rendered-js" type="module">
-import "//hashsan.github.io/use/use.js";
+import {CatchSky} from "https://hashsan.github.io/catch_sky/CatchSky.js?v3";
+import "https://hashsan.github.io/catch_sky/renderHelp.js";
+
+import "//hashsan.github.io/fujiyama/fujiyama.js"
+import "//hashsan.github.io/fujiyama/fujiyama.util.js"
+
+import "//hashsan.github.io/use/use.js?v=35"
+import {Octo} from "//hashsan.github.io/Octo/Octo.js"
+import "//hashsan.github.io/hashsan.js/hashsan.js"
+
+import {EditorFrame,Press} from "//hashsan.github.io/EditorFrame/EditorFrame.js";
 
 
-function makeDay(){
-  const diff = 9*60*60*1000
-  const now = new Date(Date.now()+diff).toISOString()
-  .split('T').at(0).split('-').join('')
-  return now
+
+fn.q('#today').href = '#'+fn.makeday() +'.txt'
+fn.q('#today').innerText = 'today'
+console.log(CatchSky)
+
+hashsan.add("#help",renderHelp)
+hashsan.add("#index",renderIndex)
+hashsan.add((d)=>/\.txt$/.test(d),renderKiji)
+
+hashsan.start('#index')
+
+
+function renderTemp(){
+  var fu = document.createElement('div')
+  var temp=`
+  ＃これはテンプレートよ。
+  キャッチャーインザースカイ
+  `
+  fn.q('.wrap').innerHTML=''
+  fu.innerHTML = fujiyama(temp)
+  fn.q('.wrap').append(fu)
+
 }
 
-function getUrl(){
-  const def_url = "https://hashsan.github.io/catch_sky/nikki/index.html"
-  const isGithub = function isGithub(d){
-    return /github\.com/.test(d) || /\.github\.io/.test(d)
+
+async function renderKiji(){
+  var fu = document.createElement('div')
+  //console.log(location.hash)
+  var name = location.hash.replace('#','')
+  var url = CatchSky.getFileUrl(name)
+  var temp =`＃ここは${name}`
+  //console.log(url)
+  fn.q('.wrap').innerHTML=''
+  fu.innerHTML = fujiyama(await getKiji(url)||temp )
+  fn.q('.wrap').append(fu)
+
+  if(!CatchSky.isAuth()){
+    return // view mode
   }
-  const url = fn.clearurl(location.href)
-  if(!isGithub(url)){
-    console.log('url not github page, so set default :',def_url)
-    return def_url
+  console.log('mode editor')
+  var ed = await buildEditor(url)
+  fn.q('.wrap').append(ed)
+  return;
+
+  ////////////////////////
+  function getKiji(url){
+    return fetch(url).then(okOnly).then(d=>d.text()).catch(d=>'')    
   }
-  return url
+  function okOnly(d){
+    if(!d.ok){ throw new Error(d.statusText) }
+    return d
+  }
+
+  function buildEditor(url){
+    return import('https://hashsan.github.io/EditorFrame/EditorFrame.js')
+      .then(async mod=>{
+      const {EditorFrame,Press} = mod
+      const api = new Octo(url,CatchSky.getToken())
+      //console.log(mod)
+      var ed = new EditorFrame()
+      ed.setTitle(url)
+      ed.setData(await api.load())
+
+      //ed.remove()
+      //
+
+      var press = new Press(ed.editor)
+      press.press('ctrl+s',(e)=>{
+        e.preventDefault()
+        ed.setMessage('saving...')
+        api.save(ed.getData()).then(d=>{
+          ed.setMessage('saved')
+        })
+      }).press('*',(e)=>{
+        fu.innerHTML = fujiyama(ed.getData() )
+        ed.setMessage('needsave')  
+      },400)
+
+      return ed.frame
+    })}
+
 }
 
-function getRepoUrl(){
-  var me = getUrl()
-  var o = fn.gitpass(me)
-  //console.log(o)
-  return o.repo_url
+
+
+
+async function renderIndex(){
+  var fu = document.createElement('div')
+  var temp=`
+＃ここはキャッチャーインザースカイのサイトです。
+このキャッチャーインザースカイは、フジヤマパーサーで書かれております。
+フジヤマパーサーとは、日本語の文章を保持したまま、ある程度のマークアップ、強調とかですね、HTMLに変換するものです。マークダウンを知ってる方は、それです。その日本語版。
+さて。
+＃記事一覧です。
+  `
+  fn.q('.wrap').innerHTML=''
+  fu.innerHTML = fujiyama(temp)
+  fn.q('.wrap').append(fu)
+
+  var el= await makeindex()
+  fn.q('.wrap').append(el)
+  //console.log(el)
+  async function makeindex(){
+    var el = document.createElement('div')
+    var url = CatchSky.getRepoUrl()
+    //console.log(url)
+    var ary =await fetch(url)
+    .then(d=>d.json());
+    //console.log(ary)
+    var html = ary.filter(d=>/\.txt$/.test(d.name))
+    .map(d=>`<a href="#${d.name}">${d.name}</a>`).join('\n')
+    el.innerHTML = html
+    return el
+  }
+
 }
 
-function getSaveUrl(){
-  var me = getUrl()
-  var day = makeDay()
-  var file = day + '.txt'
-  var url = fn.tailchange(me,file)
-  return url
-}
-
-var url = getUrl()
-fn.q('#url').innerText = url
-
-var repo_url = getRepoUrl()
-fn.q('#repo_url').innerText = repo_url
-
-var save_url = getSaveUrl()
-fn.q('#save_url').innerText = save_url
 
 
-class NikkiSys{
-  
-  
-  getRepoUrl=()=>{
-    
-  }
-  getSaveUrl=()=>{
-    
-  }
-  setToken=(token)=>{
-    
-  }
-  checkAuth=async()=>{
-    
-    return this.img
-  }
-  save=async(data)=>{
-    
-  }
-  load=async()=>{
-    
-  }
-  
-}
+//var u =CatchSky.getFileUrl('xyz.txt')
+//console.log(u)
+
+/*
+CatchSky.setToken( localStorage["test_ghp"] )
+CatchSky.checkAuth().then(d=>{
+  console.log(d)
+})
+*/
     </script>
 
   
