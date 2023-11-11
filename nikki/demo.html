@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  
+  
+  
+
+  <title>CodePen - このサイトは</title>
+
+    <link rel="canonical" href="https://codepen.io/pinkromeo/pen/QWYvRMJ">
+  
+  
+  <link rel='stylesheet' href='//hashsan.github.io/blackout/blackout.css'>
+  
+
+  
+  
+  
+</head>
+
+<body>
+  <h1 id="mes">...</h1>
+<h1>このサイトの純粋なアドレスは</h1>
+<h1><span id="url"></span></h1>
+<h1>このサイトの一覧を示すアドレスは</h1>
+<h1><span id="repo_url"></span></h1>
+<h1>セーブされるアドレスは</h1>
+<h1><span id="save_url"></span></h1>
+<p><input id="ghp" placeholder="ghp"></p>
+<h1>アバター↓。認証済みだと表示される。</h1>
+<img id="avator" width="400px">
+<style>
+  h1,span{
+  word-break:break-all;
+}
+</style>
+  
+      <script id="rendered-js" type="module">
+import {NikkiSys} from "https://codepen.io/pinkromeo/pen/WNPjqwV.js?v=1"
+import "//hashsan.github.io/use/use.js";
+import {Printer} from "https://hashsan.github.io/Printer/Printer.js"
+
+
+
+
+
+//console.log(sys)
+fn.q('#avator').src = NikkiSys.getAvator()
+
+NikkiSys.setToken(localStorage.ghp)
+NikkiSys.checkAuth().then(d=>{
+  
+  fn.q('#avator').src = NikkiSys.getAvator()
+  
+})
+
+
+var o = fn.gitpass(NikkiSys.getSaveUrl())
+console.log(o)
+
+fn.q('#url').innerText = NikkiSys.getUrl()
+fn.q('#repo_url').innerText = NikkiSys.getRepoUrl()
+
+fn.q('#save_url').innerText = NikkiSys.getSaveUrl()
+
+
+var print = Printer(fn.q('#mes'))
+print(String(new Date()),'orange')
+
+
+var ghp =fn.q('#ghp')
+ghp.onblur =()=>{
+  if(!ghp.value){
+    return
+  }
+  NikkiSys.setToken(ghp.value)
+  NikkiSys.checkAuth().then(d=>{
+  
+  fn.q('#avator').src = NikkiSys.getAvator()
+  
+})
+
+}
+    </script>
+
+  
+</body>
+
+</html>
