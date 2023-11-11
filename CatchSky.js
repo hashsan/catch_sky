@@ -80,3 +80,12 @@ class CatchSky{
   }
   ///
 }
+
+
+
+CatchSky = new CatchSky()
+export {CatchSky}
+
+
+
+
