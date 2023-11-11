@@ -1,36 +1,66 @@
 <head>
-  <link rel="stylesheet" href="https://hashsan.github.io/fujiyama/fujiyama.css?v15">
-  <style>
-    #left{
-      margin-left:2rem;
-    }    
-  </style> 
+  <title>このサイトは</title>
 </head>
 <body>
-  <div id="left" class="pbox">
-    <div>
-      <a href="#index">index</a>
-      <a href="#new">new</a>          
-      <a href="#login">login</a>      
-    </div>  
-    <div class="view wrap"></div>
-    <div class="r"><a href="#">goto ^</a></div>
-  </div>
-  <script>
-import "https://hashsan.github.io/use/use.js?v31"    
-console.log(location)
-function geturl(){
-  const DEF_URL ='https://hashsan.github.io/catch_sky/nikki/'  
-  const {origin,pathname} =location
-  const url = origin + pathname
-  const {isgithub} = fn.gitpass(url)
-  if(!isgithub){
-    return DEF_URL
+<link rel="stylesheet" href="//hashsan.github.io/blackout/blackout.css">
+<h1>このサイトの純粋なアドレスは</h1>
+<h1><span id="url"></span></h1>
+<h1>このサイトの一覧を示すアドレスは</h1>
+<h1><span id="repo_url"></span></h1>
+<h1>セーブされるアドレスは</h1>
+<h1><span id="save_url"></span></h1>
+<style>
+  h1,span{
+  word-break:break-all;
+}
+</style>
+<script type="module">
+import "//hashsan.github.io/use/use.js";
+
+
+function makeDay(){
+  const diff = 9*60*60*1000
+  const now = new Date(Date.now()+diff).toISOString()
+  .split('T').at(0).split('-').join('')
+  return now
+}
+
+function getUrl(){
+  const def_url = "https://hashsan.github.io/catch_sky/nikki/index.html"
+  const isGithub = function isGithub(d){
+    return /github\.com/.test(d) || /\.github\.io/.test(d)
+  }
+  const url = fn.clearurl(location.href)
+  if(!isGithub(url)){
+    console.log('url not github page, so set default :',def_url)
+    return def_url
   }
   return url
 }
-var o = fn.gitpass(geturl())
-console.log(o)
-    
-  </script>
+
+function getRepoUrl(){
+  var me = getUrl()
+  var o = fn.gitpass(me)
+  //console.log(o)
+  return o.repo_url
+}
+
+function getSaveUrl(){
+  var me = getUrl()
+  var day = makeDay()
+  var file = day + '.txt'
+  var url = fn.tailchange(me,file)
+  return url
+}
+
+var url = getUrl()
+fn.q('#url').innerText = url
+
+var repo_url = getRepoUrl()
+fn.q('#repo_url').innerText = repo_url
+
+var save_url = getSaveUrl()
+fn.q('#save_url').innerText = save_url
+
+</script>
 </body>
