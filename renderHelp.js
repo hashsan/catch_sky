@@ -1,8 +1,8 @@
 import {CatchSky} from "https://hashsan.github.io/catch_sky/CatchSky.js?v2";
 import "//hashsan.github.io/fujiyama/fujiyama.js"
 import "//hashsan.github.io/use/use.js"
-import {Octo} from "//hashsan.github.io/Octo/Octo.js"
-/*import "//hashsan.github.io/hashsan.js/hashsan.js"*/
+/*import {Octo} from "//hashsan.github.io/Octo/Octo.js"
+import "//hashsan.github.io/hashsan.js/hashsan.js"*/
 
 
 console.log(CatchSky)
