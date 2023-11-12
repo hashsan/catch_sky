@@ -63,3 +63,7 @@ async function renderKiji(){
     })}
 
 }
+
+
+
+window.renderKiji = renderKiji
