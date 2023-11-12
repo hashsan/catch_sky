@@ -80,8 +80,10 @@ export function korega_import() {
 }
 ---
 と先頭にエクスポートをつければいい。
-https://i.pinimg.com/564x/fc/61/00/fc6100d3ddedd037b1a212f0eeea9949.jpg
 「怠惰だな。だが簡単でよろしい」
+https://i.pinimg.com/564x/fc/61/00/fc6100d3ddedd037b1a212f0eeea9949.jpg
+「（隠せない胸、プライスレス）」
+
 
 
 
