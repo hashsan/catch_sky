@@ -62,6 +62,7 @@ async function renderKiji(){
         })
       })
         .press('ctrl+v',(e)=>{
+          //v4
         fu.innerHTML = fujiyama(ed.getData() )
         ed.setMessage('needsave')            
         })
