@@ -152,6 +152,15 @@ import {Config} as omaenoConfig from "Config.js"
 import * as mod from "Config.js"
 console.log('omaenoConfig', mod.Config)
 ---
+「あるいは作ったやつの命名規則が究極的に長いとかな！」
+---
+export class oregaKinouYondaHonnNiHaSoreHaNicheNandagaNaKoreWoTukae{
+}
+---
+「KoreWoTukaeって！！ニーチェ？」
+---
+import * as naga from "Niche.js"
+---
 https://i.pinimg.com/564x/09/ec/f9/09ecf9ee1b74eebc397db167397c0556.jpg
 「（魚肌！）」
 
