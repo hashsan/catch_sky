@@ -157,10 +157,12 @@ console.log('omaenoConfig', mod.Config)
 export class oregaKinouYondaHonnNiHaSoreHaNicheNandagaNaKoreWoTukae{
 }
 ---
-「KoreWoTukaeって！！ニーチェ？」
+「これを使えって。。。」
 ---
-import * as naga from "Niche.js"
+import * as whats from "Niche.js"
+console.log(whats)
 ---
+「ニーチェ？」
 https://i.pinimg.com/564x/09/ec/f9/09ecf9ee1b74eebc397db167397c0556.jpg
 「（魚肌！）」
 
