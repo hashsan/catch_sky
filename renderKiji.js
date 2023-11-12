@@ -1,5 +1,12 @@
 
+
+
 async function renderKiji(){
+  await import("//hashsan.github.io/fujiyama/fujiyama.js")
+  await import("//hashsan.github.io/use/use.js?v=35")
+  const {CatchSky} = await import("https://hashsan.github.io/catch_sky/CatchSky.js?v3")
+
+  
   var fu = document.createElement('div')
   //console.log(location.hash)
   var name = location.hash.replace('#','')
@@ -27,10 +34,10 @@ async function renderKiji(){
     return d
   }
 
-  function buildEditor(url){
-    return import('https://hashsan.github.io/EditorFrame/EditorFrame.js')
-      .then(async mod=>{
-      const {EditorFrame,Press} = mod
+  async function buildEditor(url){      
+      const {EditorFrame,Press} = await import('https://hashsan.github.io/EditorFrame/EditorFrame.js')
+      const {Octo} = await import("https://hashsan.github.io/Octo/Octo.js")
+
       const api = new Octo(url,CatchSky.getToken())
       //console.log(mod)
       var ed = new EditorFrame()
