@@ -75,17 +75,14 @@ body{
       <script id="rendered-js" type="module">
 import {CatchSky} from "https://hashsan.github.io/catch_sky/CatchSky.js?v3";
 import "https://hashsan.github.io/catch_sky/renderHelp.js";
+import "https://hashsan.github.io/catch_sky/renderIndex.js?v=4";
+import "https://hashsan.github.io/catch_sky/renderKiji.js?v=3";
 
 import "//hashsan.github.io/fujiyama/fujiyama.js"
 import "//hashsan.github.io/fujiyama/fujiyama.util.js"
 
 import "//hashsan.github.io/use/use.js?v=35"
-import {Octo} from "//hashsan.github.io/Octo/Octo.js"
 import "//hashsan.github.io/hashsan.js/hashsan.js"
-
-import {EditorFrame,Press} from "//hashsan.github.io/EditorFrame/EditorFrame.js";
-
-
 
 fn.q('#today').href = '#'+fn.makeday() +'.txt'
 fn.q('#today').innerText = 'today'
@@ -109,111 +106,6 @@ function renderTemp(){
   fn.q('.wrap').append(fu)
 
 }
-
-
-async function renderKiji(){
-  var fu = document.createElement('div')
-  //console.log(location.hash)
-  var name = location.hash.replace('#','')
-  var url = CatchSky.getFileUrl(name)
-  var temp =`＃ここは${name}`
-  //console.log(url)
-  fn.q('.wrap').innerHTML=''
-  fu.innerHTML = fujiyama(await getKiji(url)||temp )
-  fn.q('.wrap').append(fu)
-
-  if(!CatchSky.isAuth()){
-    return // view mode
-  }
-  console.log('mode editor')
-  var ed = await buildEditor(url)
-  fn.q('.wrap').append(ed)
-  return;
-
-  ////////////////////////
-  function getKiji(url){
-    return fetch(url).then(okOnly).then(d=>d.text()).catch(d=>'')    
-  }
-  function okOnly(d){
-    if(!d.ok){ throw new Error(d.statusText) }
-    return d
-  }
-
-  function buildEditor(url){
-    return import('https://hashsan.github.io/EditorFrame/EditorFrame.js')
-      .then(async mod=>{
-      const {EditorFrame,Press} = mod
-      const api = new Octo(url,CatchSky.getToken())
-      //console.log(mod)
-      var ed = new EditorFrame()
-      ed.setTitle(url)
-      ed.setData(await api.load())
-
-      //ed.remove()
-      //
-
-      var press = new Press(ed.editor)
-      press.press('ctrl+s',(e)=>{
-        e.preventDefault()
-        ed.setMessage('saving...')
-        api.save(ed.getData()).then(d=>{
-          ed.setMessage('saved')
-        })
-      }).press('*',(e)=>{
-        fu.innerHTML = fujiyama(ed.getData() )
-        ed.setMessage('needsave')  
-      },400)
-
-      return ed.frame
-    })}
-
-}
-
-
-
-
-async function renderIndex(){
-  var fu = document.createElement('div')
-  var temp=`
-＃ここはキャッチャーインザースカイのサイトです。
-このキャッチャーインザースカイは、フジヤマパーサーで書かれております。
-フジヤマパーサーとは、日本語の文章を保持したまま、ある程度のマークアップ、強調とかですね、HTMLに変換するものです。マークダウンを知ってる方は、それです。その日本語版。
-さて。
-＃記事一覧です。
-  `
-  fn.q('.wrap').innerHTML=''
-  fu.innerHTML = fujiyama(temp)
-  fn.q('.wrap').append(fu)
-
-  var el= await makeindex()
-  fn.q('.wrap').append(el)
-  //console.log(el)
-  async function makeindex(){
-    var el = document.createElement('div')
-    var url = CatchSky.getRepoUrl()
-    //console.log(url)
-    var ary =await fetch(url)
-    .then(d=>d.json());
-    //console.log(ary)
-    var html = ary.filter(d=>/\.txt$/.test(d.name))
-    .map(d=>`<a href="#${d.name}">${d.name}</a>`).join('\n')
-    el.innerHTML = html
-    return el
-  }
-
-}
-
-
-
-//var u =CatchSky.getFileUrl('xyz.txt')
-//console.log(u)
-
-/*
-CatchSky.setToken( localStorage["test_ghp"] )
-CatchSky.checkAuth().then(d=>{
-  console.log(d)
-})
-*/
     </script>
 
   
