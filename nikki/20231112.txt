@@ -13,5 +13,27 @@
 モジュールの分割が検討課題にあがったので、インポートを極めなければならないな。
 インポートというのは、これのこと。
 ---
+//p1
+import "korega_import.js"
 ---
+とか
+---
+//p2
+import korega_import from "korega_import.js"
+---
+とか
+---
+//p3
+import {korega_import} from "korega_import.js"
+---
+とか
+---
+//p4
+import('korega_import.js').then(mod=>{
+ const {korega_import} = mod
+})
+---
+これくらいだな。
+それぞれ解説。というか、自分の知ってる範囲内で。
+
 
