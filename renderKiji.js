@@ -60,7 +60,7 @@ async function renderKiji(){
       },400)
 
       return ed.frame
-    })}
+    }
 
 }
 
