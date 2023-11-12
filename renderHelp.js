@@ -1,18 +1,23 @@
-import {CatchSky} from "https://hashsan.github.io/catch_sky/CatchSky.js?v2";
-import "//hashsan.github.io/fujiyama/fujiyama.js"
-import "//hashsan.github.io/use/use.js"
+//import {CatchSky} from "https://hashsan.github.io/catch_sky/CatchSky.js?v2";
+//import "//hashsan.github.io/fujiyama/fujiyama.js"
+//import "//hashsan.github.io/use/use.js"
 /*import {Octo} from "//hashsan.github.io/Octo/Octo.js"
-import "//hashsan.github.io/hashsan.js/hashsan.js"*/
+//import "//hashsan.github.io/hashsan.js/hashsan.js"*/
 
 
-console.log(CatchSky)
+//console.log(CatchSky)
 
 /*
 hashsan.add("#help",renderHelp)
 hashsan.start('#help')
 */
 
-function renderHelp(){
+async function renderHelp(){
+  const {CatchSky} = await import("https://hashsan.github.io/catch_sky/CatchSky.js?v2")
+  const {fujiyama} = await import("https://hashsan.github.io/fujiyama/fujiyama.js")
+  const {fn} = await import("https://hashsan.github.io/use/use.js")
+
+  
   var fu = document.createElement('div')
 var temp=`
 ＃キャッチスカイに関して。
