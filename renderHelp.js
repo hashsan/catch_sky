@@ -15,9 +15,9 @@ hashsan.start('#help')
 */
 
 async function renderHelp(){
-  const {CatchSky} = await import("https://hashsan.github.io/catch_sky/CatchSky.js?v2")
+  await import("https://hashsan.github.io/use/use.js")  
   await import("https://hashsan.github.io/fujiyama/fujiyama.js")
-  await import("https://hashsan.github.io/use/use.js")
+  const {CatchSky} = await import("https://hashsan.github.io/catch_sky/CatchSky.js?v2")
   
   
   var fu = document.createElement('div')
