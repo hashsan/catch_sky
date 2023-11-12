@@ -232,6 +232,26 @@ https://i.pinimg.com/564x/4b/80/1e/4b801e47da40bf0e1dc5b4d4a8f61bbd.jpg
 「サマリー！」だの
 「サムネイル！」だの
 があるので、それらを分析して、正しく設定する必要がある。これができると、様々なブログサービスにアップロードができる。多くの場合APIが提供されていれば、というか、されているはず。
+あと「スクリプト！」
+フジヤマの第二引数空いてるんだよな。
+---
+var html = fujiyama(str)
+---
+からの
+---
+var da = fujiyama(str,foblog)
+// da.html //fujiyama(str)と同じ
+// da.title
+// da.summary
+// da.body
+// da.thumbnail
+// da.tags
+---
+な感じにしようか。
+https://i.pinimg.com/564x/24/5a/bd/245abd5dfa2ba855528576d9b03face5.jpg
+「（あっ、まだCTRL+Vできてない）」
+「フューチャー！」
+
 
 
 
