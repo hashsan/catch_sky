@@ -31,3 +31,5 @@ async function renderIndex(){
   }
 
 }
+
+window.renderIndex = renderIndex;
