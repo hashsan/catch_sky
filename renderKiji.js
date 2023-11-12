@@ -4,6 +4,7 @@ v2 dynamic import
 v3 cut out the renderKiji.js
 v4 ctrl+v -> render
 v5 Enter is 30sec maid save
+v6 add Printer.print alert
 */
 
 
@@ -43,40 +44,46 @@ async function renderKiji(){
   async function buildEditor(url){      
       const {EditorFrame,Press} = await import('https://hashsan.github.io/EditorFrame/EditorFrame.js')
       const {Octo} = await import("https://hashsan.github.io/Octo/Octo.js")
+      const {Printer} = await import("https://hashsan.github.io/Printer/Printer.js")
 
+
+    
       const api = new Octo(url,CatchSky.getToken())
       //console.log(mod)
       var ed = new EditorFrame()
       ed.setTitle(url)
       ed.setData(await api.load())
 
+      const print = Printer(ed.message)
+      const alert_color = '#f26'
+      
       //ed.remove()
       //
 
       var press = new Press(ed.editor)
       press
         .press('ctrl+s',(e)=>{
-        e.preventDefault()
-        ed.setMessage('saving...')
-        api.save(ed.getData()).then(d=>{
-          ed.setMessage('saved')
+          e.preventDefault()
+          print('saving...')
+          api.save(ed.getData()).then(d=>{
+          print('saved')
         })
       })
        .press('Enter',(e)=>{
          //v5
-        ed.setMessage('auto saving...')
-        api.save(ed.getData()).then(d=>{
-          ed.setMessage('auto saved')
+          print('auto saving...')
+          api.save(ed.getData()).then(d=>{
+          print('auto saved')
         })
       },30*1000)        
         .press('ctrl+v',(e)=>{
           //v4
-        fu.innerHTML = fujiyama(ed.getData() )
-        ed.setMessage('needsave')            
+          fu.innerHTML = fujiyama(ed.getData() )
+          print('needsave',alert_color)            
         })
         .press('*',(e)=>{
-        fu.innerHTML = fujiyama(ed.getData() )
-        ed.setMessage('needsave')  
+          fu.innerHTML = fujiyama(ed.getData() )
+          print('needsave',alert_color)  
       },400)
 
       return ed.frame
