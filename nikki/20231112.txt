@@ -176,5 +176,5 @@ function main(mod){
 ---
 なんか、懐かしい感じになった。
 動的インポートはエントリーポイントがわかりやすいね。
-
-
+https://i.pinimg.com/564x/ab/a2/6b/aba26b5d3aaaa21b192575ae8bf0f04d.jpg
+「mainさん・・・。ちっす」
