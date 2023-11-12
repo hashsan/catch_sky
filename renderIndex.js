@@ -1,7 +1,7 @@
 
 async function renderIndex(){
   await import("//hashsan.github.io/use/use.js?v=35")
-  const  {CatchSky} await import("https://hashsan.github.io/catch_sky/CatchSky.js?v3")
+  const  {CatchSky} = await import("https://hashsan.github.io/catch_sky/CatchSky.js?v3")
   var fu = document.createElement('div')
   var temp=`
 ＃ここはキャッチャーインザースカイのサイトです。
