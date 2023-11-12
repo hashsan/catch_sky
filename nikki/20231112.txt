@@ -52,7 +52,36 @@ export default korega_import
 https://i.pinimg.com/564x/21/b5/fd/21b5fd02e7a03fd508712899f0cb9cff.jpg
 「ムスタングというのは{}だぞ」
 「あと、お前の腰ベルト切れそうになってるじゃないか、ゴブリンか、コボルトか、修繕しておけ」
-「（こいつ、いい女）」
+「（こいつ、ツンデレだけど、いい女）」
+
+＃名前も固定しますよ。一字一句間違えないでインポートして下さいっ！
+っていうときは「p3」
+「p3」は。
+---
+import {korega_import} from "korega_import.js"
+---
+いわゆる、ムスタング付きで。
+対応するエクスポートは。
+---
+function korega_import...
+export {korega_import}
+---
+主に、共通する変数なんかを使う場合、これはシングルトン的なパターンとか、もう、みんなこれで決めろよとか、余計なことしたくない場合、作り手のほうがな。
+どういう意味かと云うと、「クラスとか関数の先頭にエクスポートつければ完成！」するからだろう。
+---
+function korega_import(){
+ return "tuku tte mita"
+}
+---
+を外にモジュールとして公開する時には。
+---
+export function korega_import() {
+...
+}
+---
+と先頭にエクスポートをつければいい。
+https://i.pinimg.com/564x/fc/61/00/fc6100d3ddedd037b1a212f0eeea9949.jpg
+「怠惰だな。だが簡単でよろしい」
 
 
 
