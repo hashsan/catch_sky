@@ -3,6 +3,7 @@ v1 lunched
 v2 dynamic import
 v3 cut out the renderKiji.js
 v4 ctrl+v -> render
+v5 Enter is 30sec maid save
 */
 
 
@@ -61,6 +62,13 @@ async function renderKiji(){
           ed.setMessage('saved')
         })
       })
+       .press('Enter',(e)=>{
+         //v5
+        ed.setMessage('auto saving...')
+        api.save(ed.getData()).then(d=>{
+          ed.setMessage('auto saved')
+        })
+      },30*1000)        
         .press('ctrl+v',(e)=>{
           //v4
         fu.innerHTML = fujiyama(ed.getData() )
