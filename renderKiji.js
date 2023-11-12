@@ -1,4 +1,9 @@
-
+/*
+v1 lunched
+v2 dynamic import
+v3 cut out the renderKiji.js
+v4 ctrl+v -> render
+*/
 
 
 async function renderKiji(){
@@ -48,13 +53,19 @@ async function renderKiji(){
       //
 
       var press = new Press(ed.editor)
-      press.press('ctrl+s',(e)=>{
+      press
+        .press('ctrl+s',(e)=>{
         e.preventDefault()
         ed.setMessage('saving...')
         api.save(ed.getData()).then(d=>{
           ed.setMessage('saved')
         })
-      }).press('*',(e)=>{
+      })
+        .press('ctrl+v',(e)=>{
+        fu.innerHTML = fujiyama(ed.getData() )
+        ed.setMessage('needsave')            
+        })
+        .press('*',(e)=>{
         fu.innerHTML = fujiyama(ed.getData() )
         ed.setMessage('needsave')  
       },400)
