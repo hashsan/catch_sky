@@ -69,3 +69,4 @@ const {Octo} = await import('Octo.j')
 「ダイナミックインポート、トラップ多数！」
 https://i.pinimg.com/564x/7f/59/0f/7f590f33f986ec11571c778b455470b8.jpg
 「（シュールだ。お前どっからきたん？）」
+＠dev3（#dev3.txt）
