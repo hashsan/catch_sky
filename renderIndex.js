@@ -1,3 +1,7 @@
+/*
+v1 lunched
+v2 double load
+*/
 
 async function renderIndex(){
   await import("//hashsan.github.io/use/use.js?v=35")
@@ -15,11 +19,17 @@ async function renderIndex(){
   fu.innerHTML = fujiyama(temp)
   fn.q('.wrap').append(fu)
 
+
+  const listid ='indexlist'
   var el= await makeindex()
-  fn.q('.wrap').append(el)
+  if(!fn.q('#'+listid)){
+    //v2
+    fn.q('.wrap').append(el)
+  }
   //console.log(el)
   async function makeindex(){
     var el = document.createElement('div')
+    el.id = listid  //v2
     var url = CatchSky.getRepoUrl()
     //console.log(url)
     var ary =await fetch(url)
