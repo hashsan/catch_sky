@@ -34,7 +34,7 @@
 「まずは、走査線を動かすキーフレームを作る」
 これ！
 ---
-        @keyframes effect {
+        @keyframes scanline {
             0% {
                 transform: translateY(-100%);
             }
