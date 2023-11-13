@@ -106,7 +106,19 @@ background: linear-gradient(to bottom, rgba(255,255,255,0) 90%, rgba(37, 64, 45,
 「劇場でよく見るEXITマークとかな！」
 走査線、技術詰め込みすぎ。やばい楽しい。
 さて、次はアニメーションの指定だぞ。
-
+---
+animation-duration: 3s;
+animation-name: scanline;
+animation-iteration-count: infinite;
+animation-timing-function: linear;
+z-index: 1;
+---
+構文はコピペでいい。
+「しかし、とても覚えやすい！」
+何をしているのかは一目瞭然だね。
+三秒でやって下さい。
+キーフレームは「scanline」というものを引っ張ります。
+何回繰り返せば？「はい、無限です」
 
 ＃まだ背景しか出来てない件。
 ---
