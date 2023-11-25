@@ -26,4 +26,17 @@
 　問題点といえば、コミットメッセージだろう。
 　しかし、コミットメッセージは、ファイルなのかを判定できれば、回避可能である。
 　画像の場合は、特にメッセージを加える必要はないだろう。せいぜい日付ぐらいである。
+　これらを加えた場合のOCTOのインターフェイス。
+---
+class Octo{
+  constructor(url,ghp){
+  }
+  save=async(data)=>{}
+  load=async()=>{}
+  auth=async()=>{}
+  sha=async()=>{}
+  upimageload=async(data,name)=>{}
 
+}
+
+---
