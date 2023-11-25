@@ -38,6 +38,10 @@ class Octo{
   upimage=async(data,name)=>{}
   summary=async()=>{}
   //
+  _get(){}
+  _put(){}
+  _res(){}  
+  //
   encode=async(data)=>{}
   decode=async(base64)=>{}
 }
