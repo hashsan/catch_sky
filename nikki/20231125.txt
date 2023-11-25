@@ -37,6 +37,9 @@ class Octo{
   sha=async()=>{}
   upimage=async(data,name)=>{}
   summary=async()=>{}
+  //
+  encode=async(data)=>{}
+  decode=async(base64)=>{}
 }
 
 ---
