@@ -35,8 +35,8 @@ class Octo{
   load=async()=>{}
   auth=async()=>{}
   sha=async()=>{}
-  upimageload=async(data,name)=>{}
-
+  upimage=async(data,name)=>{}
+  summary=async()=>{}
 }
 
 ---
