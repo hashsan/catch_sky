@@ -29,6 +29,10 @@
 　これらを加えた場合のOCTOのインターフェイス。
 ---
 class Octo{
+  owner
+  repo
+  path
+  //
   constructor(url,ghp){
   }
   save=async(data)=>{}
@@ -45,5 +49,4 @@ class Octo{
   encode=async(data)=>{}
   decode=async(base64)=>{}
 }
-
 ---
